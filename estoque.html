@@ -106,7 +106,7 @@ p{margin:0}
 .card-preco{margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid var(--line)}
 .preco{font:800 1.45rem/1 var(--disp);color:var(--ink)}
 .preco.consulta{font-size:1.05rem;font-weight:700}
-.card-preco small{color:var(--red-d);font-weight:600;font-size:.88rem}
+.card-preco small{color:var(--red-d);font-weight:600;font-size:.88rem;white-space:nowrap}
 .card.esqueleto{pointer-events:none}
 .esqueleto .card-foto,.esqueleto .barra{background:linear-gradient(90deg,#E4E5E8 0,#EFEFF1 40%,#E4E5E8 80%);background-size:300% 100%;animation:brilho 1.4s infinite linear}
 .esqueleto .barra{height:16px;border-radius:4px}
@@ -120,16 +120,112 @@ p{margin:0}
 .aviso .acoes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:4px}
 
 /* ---------- rodapé ---------- */
-.rodape{background:var(--preto);color:#B9BBC1;margin-top:90px;padding:52px 0 26px;font-size:.98rem}
-.rodape a{color:#fff}
-.rodape-grade{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
-.rodape .logo{width:200px;margin-bottom:18px}
+.rodape{background:var(--preto);color:#B9BBC1;margin-top:0;border-top:1px solid #1C1D21;padding:56px 0 26px;font-size:.96rem}
+.rodape a{color:#fff;text-decoration:none}
+.rodape a:hover{text-decoration:underline}
+.rodape-grade{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:36px}
+.rodape .logo{width:210px;margin-bottom:16px}
+.rodape-marca p{max-width:34ch}
+.redes{display:flex;gap:8px;margin-top:18px}
+.redes a{width:40px;height:40px;border:1px solid #2A2B30;border-radius:50%;display:grid;place-items:center;color:#fff}
+.redes a:hover{border-color:var(--red);text-decoration:none}
+.redes svg{width:18px;height:18px}
 .rodape h4{font:700 1rem/1 var(--disp);color:#fff;margin:0 0 14px}
-.rodape ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
-.rodape .horas li{display:flex;justify-content:space-between;gap:16px;max-width:280px}
-.rodape .base{margin-top:42px;padding-top:20px;border-top:1px solid #26272B;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.88rem;color:#85888F}
+.rodape ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rodape .base{margin-top:42px;padding-top:20px;border-top:1px solid #26272B;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.86rem;color:#85888F}
 .rodape .base a{color:#B9BBC1}
-@media (max-width:820px){.rodape-grade{grid-template-columns:1fr}}
+@media (max-width:900px){.rodape-grade{grid-template-columns:1fr 1fr}.rodape-marca{grid-column:1/-1}}
+@media (max-width:520px){.rodape-grade{grid-template-columns:1fr}}
+
+/* ---------- botões flutuantes (computador) ---------- */
+.flutuante{position:fixed;right:20px;bottom:22px;z-index:44;display:grid;gap:10px}
+.flutuante a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.flutuante a.wa{background:var(--red);color:#fff}
+.flutuante svg{width:24px;height:24px}
+@media (max-width:820px){.flutuante{display:none}}
+
+/* ---------- blocos de página compartilhados ---------- */
+.cab{background:var(--preto);color:#fff;padding:44px 0 46px;position:relative}
+.cab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--red) 0,var(--red) 40%,rgba(200,19,30,0) 85%)}
+.trilha{font-size:.9rem;color:#9C9FA6;margin-bottom:14px}
+.trilha a{color:#D9DADD;text-decoration:none}
+.trilha a:hover{text-decoration:underline}
+.cab h1{font-size:clamp(2.2rem,5vw,3.5rem);max-width:18ch}
+.cab p.lead{color:#B9BBC1;margin-top:14px}
+.cab .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.cab .btn-linha{color:#fff}
+.cab .btn-linha:hover{background:rgba(255,255,255,.08)}
+
+.secao{padding:76px 0 0}
+.secao-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-bottom:30px;flex-wrap:wrap}
+.secao-topo>div{max-width:640px}
+.secao-topo p{color:var(--muted);margin-top:10px}
+.secao-topo a.mais{font:600 1rem/1 var(--disp);color:var(--ink);text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:5px}
+
+/* faixa de vantagens: lista com divisórias, não cartões */
+.vantagens{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.vantagem{padding:24px 22px 26px;display:grid;gap:8px;align-content:start}
+.vantagem+.vantagem{border-left:1px solid var(--line)}
+.vantagem svg{width:28px;height:28px;color:var(--red)}
+.vantagem h3{font-size:1.12rem}
+.vantagem p{color:var(--muted);font-size:.95rem}
+@media (max-width:900px){.vantagens{grid-template-columns:1fr 1fr}.vantagem:nth-child(3){border-left:0}.vantagem:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:520px){.vantagens{grid-template-columns:1fr}.vantagem+.vantagem{border-left:0;border-top:1px solid var(--line)}.vantagem:nth-child(-n+2){border-bottom:0}}
+
+/* passos de um processo real (numerados porque são uma sequência) */
+.passos{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;counter-reset:passo;list-style:none;margin:0;padding:0}
+.passo{padding:26px 24px 28px;border-right:1px solid var(--line)}
+.passo:last-child{border-right:0}
+.passo::before{counter-increment:passo;content:counter(passo);display:block;font:800 2.6rem/1 var(--disp);color:var(--red);margin-bottom:14px}
+.passo h3{margin-bottom:8px}
+.passo p{color:var(--muted);font-size:.98rem}
+@media (max-width:900px){.passos{grid-template-columns:1fr 1fr}.passo:nth-child(2){border-right:0}.passo:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:560px){.passos{grid-template-columns:1fr}.passo{border-right:0;border-bottom:1px solid var(--line)}.passo:last-child{border-bottom:0}}
+
+/* dúvidas frequentes */
+.faq{max-width:820px;border-top:2px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 2px;font:700 1.12rem/1.3 var(--disp)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:12px;height:12px;border-right:2.5px solid var(--red);border-bottom:2.5px solid var(--red);transform:rotate(45deg);margin-top:-6px;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:6px}
+.faq details p{padding:0 2px 22px;color:var(--muted);max-width:68ch}
+
+/* chamada final */
+.chamada{margin-top:84px;background:var(--preto);color:#fff}
+.chamada .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;padding-top:48px;padding-bottom:48px}
+.chamada h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+.chamada p{color:#B9BBC1;margin-top:8px}
+.chamada .acoes{display:flex;gap:10px;flex-wrap:wrap}
+.chamada .btn-linha{color:#fff}
+.chamada .risco{margin-top:16px}
+
+/* formulários (financiamento e consignação) */
+.ficha-form{display:grid;gap:18px}
+.etapa{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 26px 28px}
+.etapa-topo{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.etapa-topo b{flex:none;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:800 1.1rem/1 var(--disp)}
+.etapa-topo h2{font-size:1.45rem}
+.etapa-topo p{color:var(--muted);font-size:.92rem}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:14px 14px}
+.campos .inteiro{grid-column:1/-1}
+@media (max-width:640px){.campos{grid-template-columns:1fr}}
+.campo{display:grid;gap:6px;align-content:start}
+.campo label,.campo .rot{font-weight:600;font-size:.95rem}
+.campo label small{color:var(--muted);font-weight:400}
+.campo .ajuda{color:var(--muted);font-size:.86rem}
+.campo input,.campo select,.campo textarea{min-height:48px;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;padding:0 12px;font-size:1.02rem;width:100%}
+.campo textarea{padding:12px;min-height:96px;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px var(--red-l)}
+.campo [aria-invalid="true"]{border-color:#B3261E;box-shadow:0 0 0 3px #FBE3E2}
+.dinheiro{position:relative}
+.dinheiro span{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.dinheiro input{padding-left:38px}
+.sigilo{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:4px solid var(--ink);border-radius:var(--radius-s);padding:12px 14px;font-size:.92rem;color:#363940}
+.sigilo svg{width:18px;height:18px;flex:none;margin-top:2px}
+.form-erro{background:#FBE9EA;color:#7E0F15;border-radius:var(--radius-s);padding:12px 14px;font-weight:600}
+.form-pe{display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap}
+.form-pe p{color:var(--muted);font-size:.9rem;max-width:46ch}
 
 /* ---------- barra fixa no celular ---------- */
 .fixo-mob{display:none}
@@ -188,31 +284,47 @@ p{margin:0}
 }
 
 
-.cab-estoque{padding:38px 0 22px}
-.cab-estoque p{color:var(--muted);margin-top:8px}
-.filtros{position:sticky;top:72px;z-index:30;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line)}
-.filtros .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.filtros input,.filtros select{min-height:44px;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;padding:0 12px;font-size:.98rem}
-.filtros input{flex:1 1 240px}
-.filtros select{flex:0 1 auto;cursor:pointer}
-.filtros input:focus,.filtros select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px var(--red-l)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;overflow:hidden}
-.seg button{min-height:42px;padding:0 14px;border:0;background:none;cursor:pointer;font:600 1rem/1 var(--disp);color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
-.seg button+button{border-left:1px solid var(--line)}
-.limpar{background:none;border:0;color:var(--red-d);font-weight:600;cursor:pointer;padding:8px;text-decoration:underline;text-underline-offset:3px}
+.estoque{display:grid;grid-template-columns:270px 1fr;gap:30px;align-items:start;padding-top:34px}
+.lado{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px 18px}
+.lado-topo{display:none}
+.grupo{padding:14px 0;border-top:1px solid var(--line)}
+.grupo:first-of-type{border-top:0;padding-top:0}
+.grupo>.rot{display:block;font:700 .98rem/1.2 var(--disp);margin-bottom:10px}
+.lado input[type=search],.lado select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;padding:0 12px;font-size:.98rem}
+.lado input:focus,.lado select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px var(--red-l)}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chips-f{display:flex;flex-wrap:wrap;gap:6px}
+.chips-f button{min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font:600 .92rem/1 var(--disp)}
+.chips-f button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.marcas{display:grid;gap:2px;max-height:230px;overflow-y:auto}
+.marcas label{display:flex;align-items:center;gap:10px;padding:7px 4px;border-radius:4px;cursor:pointer;font-size:.97rem}
+.marcas label:hover{background:var(--bg)}
+.marcas input{width:18px;height:18px;accent-color:var(--red);flex:none}
+.marcas span{flex:1}
+.marcas small{color:var(--muted)}
+.limpar{width:100%;margin-top:14px}
+.barra{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.barra .total{color:var(--muted)}
+.barra .total b{color:var(--ink);font:800 1.4rem/1 var(--disp);margin-right:4px}
+.barra-dir{display:flex;gap:8px;align-items:center}
+.barra select{min-height:42px;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;padding:0 10px;font-size:.95rem;cursor:pointer}
 .btn-filtros{display:none}
-.resumo-lista{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 0 18px;color:var(--muted)}
-.resumo-lista b{color:var(--ink)}
-@media (max-width:820px){
-  .filtros{top:104px}
-  .filtros .extra{display:none;width:100%;flex-wrap:wrap;gap:8px}
-  .filtros.aberto .extra{display:flex}
-  .filtros .extra select{flex:1 1 45%}
-  .btn-filtros{display:inline-flex;min-height:44px;align-items:center;gap:6px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;font:600 1rem/1 var(--disp);cursor:pointer}
-  .btn-filtros .n{background:var(--red);color:#fff;border-radius:999px;padding:2px 7px;font-size:.8rem}
+.btn-filtros .n{background:var(--red);color:#fff;border-radius:999px;padding:2px 7px;font-size:.8rem}
+.aviso-vendido{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:var(--radius-s);padding:12px 14px;margin-bottom:16px}
+.mais-wrap{display:flex;justify-content:center;margin-top:28px}
+.estoque .grade{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+@media (max-width:960px){
+  .estoque{grid-template-columns:1fr;padding-top:22px}
+  .lado{position:fixed;inset:0 auto 0 0;z-index:70;width:min(360px,90vw);overflow-y:auto;border-radius:0;border:0;transform:translateX(-102%);transition:transform .22s ease-out;padding-top:0}
+  .lado.aberto{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.5)}
+  .lado-topo{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;padding:16px 0 12px;margin-bottom:6px;border-bottom:1px solid var(--line);z-index:1}
+  .lado-topo h2{font-size:1.3rem}
+  .lado-topo button{width:40px;height:40px;border:0;background:var(--bg);border-radius:50%;cursor:pointer;display:grid;place-items:center}
+  .lado-topo svg{width:18px;height:18px}
+  .lado .ver{position:sticky;bottom:0;background:#fff;padding:12px 0 calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+  .btn-filtros{display:inline-flex;min-height:42px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius-s);background:#fff;align-items:center;gap:6px;font:600 .98rem/1 var(--disp);cursor:pointer}
 }
-@media (min-width:821px){.filtros .extra{display:contents}}
+@media (min-width:961px){.lado .ver{display:none}}
 
 </style>
 
@@ -222,59 +334,68 @@ p{margin:0}
 <header class="topo">
   <div class="wrap">
     <a class="marca" href="index.html" aria-label="Glycerio Veículos, página inicial"><span class="logo" role="img" aria-label="Glycerio Veículos"></span></a>
-    <nav class="nav" aria-label="Principal"><a href="index.html">Início</a><a href="estoque.html" aria-current="page">Estoque</a><a href="financiamento.html">Financiamento</a><a href="index.html#loja">A loja</a></nav>
+    <nav class="nav" aria-label="Principal"><a href="index.html">Início</a><a href="estoque.html" aria-current="page">Estoque</a><a href="financiamento.html">Financiamento</a><a href="consignacao.html">Consignação</a></nav>
     <a class="btn btn-wa" data-wa="Olá! Vim pelo site da Glycerio Veículos." href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span>Falar no WhatsApp</span></a>
   </div>
-  <nav class="menu-mob" aria-label="Principal (celular)"><a href="index.html">Início</a><a href="estoque.html" aria-current="page">Estoque</a><a href="financiamento.html">Financiamento</a><a href="index.html#loja">A loja</a></nav>
+  <nav class="menu-mob" aria-label="Principal (celular)"><a href="index.html">Início</a><a href="estoque.html" aria-current="page">Estoque</a><a href="financiamento.html">Financiamento</a><a href="consignacao.html">Consignação</a></nav>
 </header>
 <main id="conteudo">
 
-<section class="cab-estoque">
+<section class="cab">
   <div class="wrap">
-    <h1 style="font-size:clamp(2.3rem,5vw,3.4rem)">Estoque</h1>
-    <p>Veículos disponíveis na Glycerio. Toque em um veículo para ver todas as fotos e a ficha completa.</p>
+    <p class="trilha"><a href="index.html">Início</a> › Estoque</p>
+    <h1>Nosso estoque</h1>
+    <p class="lead">Filtre por tipo, marca, preço ou ano e toque no veículo para ver todas as fotos e a ficha completa.</p>
   </div>
 </section>
 
-<div class="filtros" id="filtros">
-  <div class="wrap">
-    <label class="sr" for="f-q">Buscar</label>
-    <input id="f-q" type="search" placeholder="Marca, modelo ou versão" autocomplete="off">
-    <div class="seg" id="f-tipo" role="group" aria-label="Tipo de veículo" hidden>
-      <button type="button" data-v="" aria-pressed="true">Todos</button>
-      <button type="button" data-v="carro" aria-pressed="false">Carros</button>
-      <button type="button" data-v="moto" aria-pressed="false">Motos</button>
+<div class="wrap estoque">
+  <aside class="lado" id="lado" aria-label="Filtrar veículos">
+    <div class="lado-topo"><h2>Filtrar veículos</h2><button type="button" id="fechar-filtros" aria-label="Fechar filtros"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="grupo"><label class="rot" for="f-q">Buscar</label><input id="f-q" type="search" placeholder="Marca, modelo, cor…" autocomplete="off"></div>
+    <div class="grupo" id="g-tipo" hidden><span class="rot">Tipo</span><div class="chips-f" id="f-tipo"></div></div>
+    <div class="grupo" id="g-cat" hidden><span class="rot">Categoria</span><div class="chips-f" id="f-cat"></div></div>
+    <div class="grupo" id="g-marca" hidden><span class="rot">Marca</span><div class="marcas" id="f-marca"></div></div>
+    <div class="grupo" id="g-preco" hidden><span class="rot">Faixa de preço</span>
+      <div class="duas">
+        <label class="sr" for="f-pmin">Preço mínimo</label><select id="f-pmin"><option value="">Mínimo</option></select>
+        <label class="sr" for="f-pmax">Preço máximo</label><select id="f-pmax"><option value="">Máximo</option></select>
+      </div>
     </div>
-    <button class="btn-filtros" type="button" id="abrir-filtros" aria-expanded="false" aria-controls="extra">Filtros <span class="n" id="n-filtros" hidden></span></button>
-    <div class="extra" id="extra">
-      <label class="sr" for="f-cat">Categoria</label>
-      <select id="f-cat"><option value="">Todas as categorias</option></select>
-      <label class="sr" for="f-preco">Preço até</label>
-      <select id="f-preco">
-        <option value="">Qualquer preço</option>
-        <option value="40000">Até R$ 40 mil</option><option value="60000">Até R$ 60 mil</option>
-        <option value="80000">Até R$ 80 mil</option><option value="100000">Até R$ 100 mil</option>
-        <option value="150000">Até R$ 150 mil</option><option value="200000">Até R$ 200 mil</option>
-      </select>
-      <label class="sr" for="f-ano">Ano a partir de</label>
-      <select id="f-ano"><option value="">Qualquer ano</option></select>
-      <label class="sr" for="f-ord">Ordenar</label>
-      <select id="f-ord">
-        <option value="">Destaques primeiro</option>
-        <option value="preco-asc">Menor preço</option>
-        <option value="preco-desc">Maior preço</option>
-        <option value="ano-desc">Mais novos</option>
-        <option value="km-asc">Menor quilometragem</option>
-      </select>
-      <button class="limpar" type="button" id="limpar" hidden>Limpar filtros</button>
+    <div class="grupo" id="g-ano" hidden><label class="rot" for="f-ano">Ano a partir de</label><select id="f-ano"><option value="">Qualquer ano</option></select></div>
+    <button class="btn btn-linha limpar" type="button" id="limpar" hidden>Limpar filtros</button>
+    <div class="ver"><button class="btn btn-wa btn-bloco" type="button" id="ver-res">Ver veículos</button></div>
+  </aside>
+
+  <div>
+    <div class="barra">
+      <p class="total" id="resumo" aria-live="polite"></p>
+      <div class="barra-dir">
+        <button class="btn-filtros" type="button" id="abrir-filtros" aria-expanded="false" aria-controls="lado">Filtros <span class="n" id="n-filtros" hidden></span></button>
+        <label class="sr" for="f-ord">Ordenar</label>
+        <select id="f-ord">
+          <option value="">Destaques primeiro</option>
+          <option value="recentes">Chegaram por último</option>
+          <option value="preco-asc">Menor preço</option>
+          <option value="preco-desc">Maior preço</option>
+          <option value="ano-desc">Mais novos</option>
+          <option value="km-asc">Menor quilometragem</option>
+        </select>
+      </div>
     </div>
+    <div id="aviso-v"></div>
+    <div class="grade" id="grade"><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div></div>
+    <div class="mais-wrap"><button class="btn btn-linha" type="button" id="mais" hidden>Carregar mais veículos</button></div>
   </div>
 </div>
 
-<section>
+<section class="chamada">
   <div class="wrap">
-    <div class="resumo-lista" id="resumo" aria-live="polite"></div>
-    <div class="grade" id="grade"><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div><div class="card esqueleto" aria-hidden="true"><div class="card-foto"></div><div class="card-corpo"><div class="barra" style="width:70%;height:22px"></div><div class="barra" style="width:45%"></div><div class="barra" style="width:85%"></div></div></div></div>
+    <div><h2>Não achou o que procurava?</h2><p>Conte o carro que você quer. A equipe avisa quando chegar um parecido.</p><span class="risco"></span></div>
+    <div class="acoes">
+      <a class="btn btn-wa" href="#" data-wa="Olá! Estou procurando um veículo que não achei no site da Glycerio."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Falar no WhatsApp</a>
+      <a class="btn btn-linha" href="tel:+5521990885517">(21) 99088-5517</a>
+    </div>
   </div>
 </section>
 
@@ -284,36 +405,49 @@ p{margin:0}
 <footer class="rodape">
   <div class="wrap">
     <div class="rodape-grade">
-      <div>
+      <div class="rodape-marca">
         <span class="logo" role="img" aria-label="Glycerio Veículos"></span>
-        <p>Dr. Agostinho Porto, 151, loja A<br>Agostinho Porto, São João de Meriti, RJ<br>CEP 25510-101</p>
-        <p style="margin-top:12px"><a href="https://maps.app.goo.gl/BQ9dN2abrDtJaRc59" target="_blank" rel="noopener">Abrir no Google Maps</a></p>
+        <p>Seminovos em São João de Meriti, com financiamento, troca do seu usado e consignação.</p>
+        <div class="redes">
+          <a href="#" data-rede="instagram" aria-label="Instagram da Glycerio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-wa="Olá! Vim pelo site da Glycerio Veículos." aria-label="WhatsApp da Glycerio"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
+          <a href="https://maps.app.goo.gl/BQ9dN2abrDtJaRc59" aria-label="Glycerio no Google Maps" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 21s7-5.4 7-10.5A7 7 0 1 0 5 10.5C5 15.6 12 21 12 21z"/><circle cx="12" cy="10.3" r="2.4"/></svg></a>
+        </div>
       </div>
       <div>
-        <h4>Horário</h4>
-        <ul class="horas">
-          <li><span>Segunda a sexta</span><span>8h às 19h</span></li>
-          <li><span>Sábado</span><span>8h às 17h</span></li>
-          <li><span>Domingo</span><span>Fechado</span></li>
+        <h4>Estoque</h4>
+        <ul id="rodape-estoque"><li><a href="estoque.html">Todos os veículos</a></li></ul>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="financiamento.html">Financiamento</a></li>
+          <li><a href="consignacao.html">Consignação</a></li>
+          <li><a href="#" data-wa="Olá! Quero avaliar meu carro para dar na troca.">Avaliar meu usado</a></li>
+          <li><a href="index.html#como-comprar">Como comprar</a></li>
         </ul>
       </div>
       <div>
-        <h4>Navegue</h4>
-        <ul>
-          <li><a href="estoque.html">Estoque</a></li>
-          <li><a href="financiamento.html">Simular financiamento</a></li>
-          <li><a href="#" data-wa="Olá! Vim pelo site da Glycerio Veículos.">WhatsApp</a></li>
-          <li><a href="#" data-rede="instagram" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="#" data-rede="facebook" target="_blank" rel="noopener">Facebook</a></li>
+        <h4>Loja</h4>
+        <ul class="horas">
+          <li>Dr. Agostinho Porto, 151, loja A</li>
+          <li>Agostinho Porto, São João de Meriti, RJ</li>
+          <li><a href="#" data-wa="Olá! Vim pelo site da Glycerio Veículos.">(21) 99088-5517</a></li>
+          <li>Seg a sex, 8h às 19h</li>
+          <li>Sábado, 8h às 17h</li>
         </ul>
       </div>
     </div>
     <div class="base">
-      <span>© <span id="ano-atual">2026</span> Glycerio Veículos</span>
+      <span>© <span id="ano-atual">2026</span> Glycerio Veículos, São João de Meriti, RJ</span>
       <span>Estoque atualizado pelo <a href="https://leadvox.com.br" target="_blank" rel="noopener">Integrador LeadVox</a></span>
     </div>
   </div>
 </footer>
+<div class="flutuante" aria-label="Contato rápido">
+  <a href="#" data-rede="instagram" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+  <a class="wa" href="#" data-wa="Olá! Vim pelo site da Glycerio Veículos." aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
+</div>
 <div class="fixo-mob">
   <a class="btn btn-linha" href="financiamento.html">Simular parcela</a>
   <a class="btn btn-wa" href="#" data-wa="Olá! Vim pelo site da Glycerio Veículos."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</a>
@@ -475,12 +609,69 @@ var G = (function () {
     });
     var ano = document.getElementById('ano-atual');
     if (ano) ano.textContent = new Date().getFullYear();
+    // rodapé: categorias que existem de verdade no estoque
+    var ul = document.getElementById('rodape-estoque');
+    if (ul) estoque(false).then(function (l) {
+      var c = categoriasVitrine(l).slice(0, 5);
+      if (l.some(function (v) { return v.tipo === 'moto'; }) && l.some(function (v) { return v.tipo !== 'moto'; })) {
+        ul.insertAdjacentHTML('beforeend', '<li><a href="estoque.html?tipo=carro">Carros</a></li><li><a href="estoque.html?tipo=moto">Motos</a></li>');
+      }
+      c.forEach(function (x) { ul.insertAdjacentHTML('beforeend', '<li><a href="estoque.html?cat=' + encodeURIComponent(x[0]) + '">' + esc(plural(x[0])) + '</a></li>'); });
+    }).catch(function () {});
+  }
+
+  // [categoria, quantidade] ordenado do maior para o menor
+  function categorias(l) {
+    var m = {};
+    l.forEach(function (v) { if (v.categoria) m[v.categoria] = (m[v.categoria] || 0) + 1; });
+    return Object.keys(m).map(function (k) { return [k, m[k]]; }).sort(function (a, b) { return b[1] - a[1]; });
+  }
+  // Para vitrine: com carros e motos juntos, as categorias de moto (Street, Trail…) entram como "Motos"
+  function categoriasVitrine(l) {
+    var mista = l.some(function (v) { return v.tipo === 'moto'; }) && l.some(function (v) { return v.tipo !== 'moto'; });
+    return categorias(mista ? l.filter(function (v) { return v.tipo !== 'moto'; }) : l);
+  }
+  function plural(c) {
+    var p = { 'SUV': 'SUVs', 'Hatch': 'Hatches', 'Sedã': 'Sedãs', 'Sedan': 'Sedãs', 'Picape': 'Picapes', 'Pickup': 'Picapes', 'Minivan': 'Minivans', 'Moto': 'Motos', 'Utilitário': 'Utilitários', 'Esportivo': 'Esportivos', 'Conversível': 'Conversíveis', 'Street': 'Street', 'Trail': 'Trail', 'Scooter': 'Scooters' };
+    return p[c] || c;
+  }
+
+  // máscaras de formulário
+  function lerDinheiro(el) { return Number(String(el.value).replace(/\D/g, '')) || 0; }
+  function mascaraDinheiro(el, depois) {
+    el.addEventListener('input', function () { var n = lerDinheiro(el); el.value = n ? num(n) : ''; if (depois) depois(); });
+  }
+  function mascaraFone(el) {
+    el.addEventListener('input', function () {
+      var d = el.value.replace(/\D/g, '').slice(0, 11);
+      el.value = d.length > 10 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7)
+        : d.length > 6 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6)
+        : d.length > 2 ? '(' + d.slice(0, 2) + ') ' + d.slice(2) : d;
+    });
+  }
+  function mascaraCpf(el) {
+    el.addEventListener('input', function () {
+      var d = el.value.replace(/\D/g, '').slice(0, 11);
+      el.value = d.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    });
+  }
+  // Valida campos obrigatórios, marca os inválidos e devolve a primeira mensagem
+  function validar(regras) {
+    var erro = '';
+    regras.forEach(function (r) {
+      var ok = r[1]();
+      r[0].setAttribute('aria-invalid', String(!ok));
+      if (!ok && !erro) { erro = r[2]; r[0].focus(); }
+    });
+    return erro;
   }
 
   return {
     esc: esc, num: num, brl: brl, km: km, ano: ano, titulo: titulo, opcionais: opcionais, temPreco: temPreco,
     wa: wa, msgVeiculo: msgVeiculo, estoque: estoque, card: card, esqueletos: esqueletos, img: img,
-    avisoVazio: avisoVazio, avisoErro: avisoErro, ligarLinks: ligarLinks, IC: IC, SEM_FOTO: SEM_FOTO
+    avisoVazio: avisoVazio, avisoErro: avisoErro, ligarLinks: ligarLinks, IC: IC, SEM_FOTO: SEM_FOTO,
+    categorias: categorias, categoriasVitrine: categoriasVitrine, plural: plural, lerDinheiro: lerDinheiro, mascaraDinheiro: mascaraDinheiro,
+    mascaraFone: mascaraFone, mascaraCpf: mascaraCpf, validar: validar
   };
 })();
 document.addEventListener('DOMContentLoaded', G.ligarLinks);
@@ -490,23 +681,31 @@ document.addEventListener('DOMContentLoaded', G.ligarLinks);
 
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var lista = [], estado = { q: '', tipo: '', cat: '', preco: '', ano: '', ord: '' };
+  var POR_PAGINA = 12;
+  var lista = [], mostrar = POR_PAGINA;
+  var vazio = function () { return { q: '', tipo: '', cat: '', marcas: [], pmin: '', pmax: '', ano: '', ord: '' }; };
+  var estado = vazio();
   var params = new URLSearchParams(location.search);
   estado.q = params.get('q') || '';
   estado.tipo = params.get('tipo') || '';
+  estado.cat = params.get('cat') || '';
+  if (params.get('marca')) estado.marcas = [params.get('marca')];
   $('f-q').value = estado.q;
 
   function semAcento(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function anoNum(v) { return Number(v.ano_modelo || v.ano_fabricacao || 0); }
 
   function filtrar() {
     var termos = semAcento(estado.q).split(/\s+/).filter(Boolean);
     var r = lista.filter(function (v) {
       if (estado.tipo && v.tipo !== estado.tipo) return false;
       if (estado.cat && v.categoria !== estado.cat) return false;
-      if (estado.preco && !(G.temPreco(v) && v.preco <= Number(estado.preco))) return false;
-      if (estado.ano && Number(v.ano_modelo || v.ano_fabricacao || 0) < Number(estado.ano)) return false;
+      if (estado.marcas.length && estado.marcas.indexOf(v.marca) < 0) return false;
+      if (estado.pmin && !(G.temPreco(v) && v.preco >= Number(estado.pmin))) return false;
+      if (estado.pmax && !(G.temPreco(v) && v.preco <= Number(estado.pmax))) return false;
+      if (estado.ano && anoNum(v) < Number(estado.ano)) return false;
       if (termos.length) {
-        var alvo = semAcento([v.marca, v.modelo, v.versao, v.cor, v.categoria, G.ano(v)].join(' '));
+        var alvo = semAcento([v.marca, v.modelo, v.versao, v.cor, v.categoria, G.ano(v), v.id].join(' '));
         for (var i = 0; i < termos.length; i++) if (alvo.indexOf(termos[i]) < 0) return false;
       }
       return true;
@@ -518,72 +717,120 @@ document.addEventListener('DOMContentLoaded', G.ligarLinks);
         if (pa === null && pb === null) return 0; if (pa === null) return 1; if (pb === null) return -1;
         return o === 'preco-asc' ? pa - pb : pb - pa;
       }
-      if (o === 'ano-desc') return (b.ano_modelo || 0) - (a.ano_modelo || 0);
+      if (o === 'ano-desc') return anoNum(b) - anoNum(a);
       if (o === 'km-asc') return (a.km == null ? 9e9 : a.km) - (b.km == null ? 9e9 : b.km);
+      if (o === 'recentes') return String(b.atualizado_em).localeCompare(String(a.atualizado_em));
       return 0;
     });
     return r;
   }
 
   function contarFiltros() {
-    var n = ['cat', 'preco', 'ano', 'ord'].filter(function (k) { return estado[k]; }).length;
+    var n = (estado.tipo ? 1 : 0) + (estado.cat ? 1 : 0) + estado.marcas.length + (estado.pmin ? 1 : 0) + (estado.pmax ? 1 : 0) + (estado.ano ? 1 : 0) + (estado.q ? 1 : 0);
     $('n-filtros').hidden = !n; $('n-filtros').textContent = n;
-    $('limpar').hidden = !(n || estado.q || estado.tipo);
+    $('limpar').hidden = !n;
   }
 
-  function desenhar() {
+  function desenhar(manterPagina) {
     contarFiltros();
-    if (!lista.length) { $('resumo').innerHTML = ''; $('grade').innerHTML = G.avisoVazio(); return; }
+    if (!manterPagina) mostrar = POR_PAGINA;
+    if (!lista.length) { $('resumo').innerHTML = ''; $('mais').hidden = true; $('grade').innerHTML = G.avisoVazio(); return; }
     var r = filtrar();
-    $('resumo').innerHTML = '<span><b>' + r.length + '</b> de ' + lista.length + ' ' + (lista.length === 1 ? 'veículo' : 'veículos') + '</span>';
+    $('resumo').innerHTML = '<b>' + r.length + '</b> ' + (r.length === 1 ? 'veículo encontrado' : 'veículos encontrados');
+    $('ver-res').textContent = r.length ? 'Ver ' + r.length + (r.length === 1 ? ' veículo' : ' veículos') : 'Nenhum veículo';
     if (!r.length) {
-      $('grade').innerHTML = '<div class="aviso" style="grid-column:1/-1"><h3>Nenhum veículo com esses filtros</h3>' +
+      $('mais').hidden = true;
+      $('grade').innerHTML = '<div class="aviso"><h3>Nenhum veículo com esses filtros</h3>' +
         '<p>Mude a busca ou limpe os filtros para ver o estoque completo. Se procura algo específico, a equipe avisa quando chegar.</p>' +
         '<div class="acoes"><button class="btn btn-linha" type="button" onclick="document.getElementById(\'limpar\').click()">Limpar filtros</button>' +
         '<a class="btn btn-wa" target="_blank" rel="noopener" href="' + G.wa('Olá! Estou procurando ' + (estado.q || 'um veículo') + ' e não achei no site. Vocês têm algo parecido?') + '">' + G.IC.wa + 'Pedir para a equipe</a></div></div>';
       return;
     }
-    $('grade').innerHTML = r.map(function (v) { return G.card(v, 'estoque.html?v=' + encodeURIComponent(v.id)); }).join('');
+    $('grade').innerHTML = r.slice(0, mostrar).map(function (v) { return G.card(v, 'estoque.html?v=' + encodeURIComponent(v.id)); }).join('');
+    $('mais').hidden = r.length <= mostrar;
+    $('mais').textContent = 'Carregar mais veículos (' + (r.length - mostrar) + ')';
   }
 
+  function chip(valor, texto, ativo) { return '<button type="button" data-v="' + G.esc(valor) + '" aria-pressed="' + ativo + '">' + G.esc(texto) + '</button>'; }
   function montarFiltros() {
-    var cats = {}, anos = {}, tipos = {};
-    lista.forEach(function (v) { if (v.categoria) cats[v.categoria] = 1; var a = v.ano_modelo || v.ano_fabricacao; if (a) anos[a] = 1; tipos[v.tipo] = 1; });
-    Object.keys(cats).sort().forEach(function (c) { $('f-cat').insertAdjacentHTML('beforeend', '<option>' + G.esc(c) + '</option>'); });
-    if (!Object.keys(cats).length) $('f-cat').hidden = true;
+    var tipos = {}, marcas = {}, anos = {};
+    lista.forEach(function (v) {
+      tipos[v.tipo] = 1;
+      if (v.marca) marcas[v.marca] = (marcas[v.marca] || 0) + 1;
+      if (anoNum(v)) anos[anoNum(v)] = 1;
+    });
+    if (Object.keys(tipos).length > 1) {
+      $('g-tipo').hidden = false;
+      $('f-tipo').innerHTML = chip('', 'Todos', !estado.tipo) + chip('carro', 'Carros', estado.tipo === 'carro') + chip('moto', 'Motos', estado.tipo === 'moto');
+    } else estado.tipo = '';
+    var cats = G.categorias(lista);
+    if (cats.length > 1) {
+      $('g-cat').hidden = false;
+      $('f-cat').innerHTML = chip('', 'Todas', !estado.cat) + cats.map(function (c) { return chip(c[0], G.plural(c[0]), estado.cat === c[0]); }).join('');
+    }
+    var lm = Object.keys(marcas).sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); });
+    if (lm.length > 1) {
+      $('g-marca').hidden = false;
+      $('f-marca').innerHTML = lm.map(function (m) {
+        return '<label><input type="checkbox" value="' + G.esc(m) + '"' + (estado.marcas.indexOf(m) > -1 ? ' checked' : '') + '><span>' + G.esc(m) + '</span><small>' + marcas[m] + '</small></label>';
+      }).join('');
+    }
+    var precos = lista.filter(G.temPreco).map(function (v) { return v.preco; });
+    if (precos.length > 1) {
+      $('g-preco').hidden = false;
+      var faixas = [10000, 20000, 30000, 40000, 50000, 60000, 80000, 100000, 120000, 150000, 200000, 300000];
+      var lo = Math.min.apply(null, precos), hi = Math.max.apply(null, precos);
+      faixas.filter(function (f) { return f > lo; }).forEach(function (f, i, arr) {
+        if (f < hi) $('f-pmin').insertAdjacentHTML('beforeend', '<option value="' + f + '">' + G.brl(f) + '</option>');
+      });
+      faixas.filter(function (f) { return f >= lo; }).forEach(function (f) {
+        if (f <= hi * 1.5) $('f-pmax').insertAdjacentHTML('beforeend', '<option value="' + f + '">Até ' + G.brl(f) + '</option>');
+      });
+    }
     var la = Object.keys(anos).map(Number).sort(function (a, b) { return b - a; });
-    la.forEach(function (a) { $('f-ano').insertAdjacentHTML('beforeend', '<option value="' + a + '">A partir de ' + a + '</option>'); });
-    if (!lista.some(G.temPreco)) $('f-preco').hidden = true;
-    $('f-tipo').hidden = Object.keys(tipos).length < 2;
-    if ($('f-tipo').hidden) estado.tipo = '';
-    marcarTipo();
+    if (la.length > 1) { $('g-ano').hidden = false; la.forEach(function (a) { $('f-ano').insertAdjacentHTML('beforeend', '<option value="' + a + '">' + a + ' ou mais novo</option>'); }); }
   }
-  function marcarTipo() {
-    $('f-tipo').querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === estado.tipo)); });
-  }
+  function marcarChips(id, valor) { $(id).querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === valor)); }); }
   function urlLista() {
     var p = new URLSearchParams();
     if (estado.q) p.set('q', estado.q);
     if (estado.tipo) p.set('tipo', estado.tipo);
+    if (estado.cat) p.set('cat', estado.cat);
+    if (estado.marcas.length === 1) p.set('marca', estado.marcas[0]);
     var s = p.toString();
     history.replaceState(history.state, '', 'estoque.html' + (s ? '?' + s : ''));
   }
+  function mudou() { desenhar(); urlLista(); }
 
   var espera;
-  $('f-q').addEventListener('input', function () { clearTimeout(espera); espera = setTimeout(function () { estado.q = $('f-q').value.trim(); desenhar(); urlLista(); }, 160); });
-  $('f-tipo').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; estado.tipo = b.getAttribute('data-v'); marcarTipo(); desenhar(); urlLista(); });
-  [['f-cat', 'cat'], ['f-preco', 'preco'], ['f-ano', 'ano'], ['f-ord', 'ord']].forEach(function (p) {
+  $('f-q').addEventListener('input', function () { clearTimeout(espera); espera = setTimeout(function () { estado.q = $('f-q').value.trim(); mudou(); }, 160); });
+  $('f-tipo').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; estado.tipo = b.getAttribute('data-v'); marcarChips('f-tipo', estado.tipo); mudou(); });
+  $('f-cat').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; estado.cat = b.getAttribute('data-v'); marcarChips('f-cat', estado.cat); mudou(); });
+  $('f-marca').addEventListener('change', function () {
+    estado.marcas = [].map.call($('f-marca').querySelectorAll('input:checked'), function (i) { return i.value; }); mudou();
+  });
+  [['f-pmin', 'pmin'], ['f-pmax', 'pmax'], ['f-ano', 'ano'], ['f-ord', 'ord']].forEach(function (p) {
     $(p[0]).addEventListener('change', function () { estado[p[1]] = this.value; desenhar(); });
   });
   $('limpar').addEventListener('click', function () {
-    estado = { q: '', tipo: '', cat: '', preco: '', ano: '', ord: '' };
-    ['f-q', 'f-cat', 'f-preco', 'f-ano', 'f-ord'].forEach(function (id) { $(id).value = ''; });
-    marcarTipo(); desenhar(); urlLista();
+    var ord = estado.ord; estado = vazio(); estado.ord = ord;
+    ['f-q', 'f-pmin', 'f-pmax', 'f-ano'].forEach(function (id) { $(id).value = ''; });
+    $('f-marca').querySelectorAll('input').forEach(function (i) { i.checked = false; });
+    marcarChips('f-tipo', ''); marcarChips('f-cat', ''); mudou();
   });
-  $('abrir-filtros').addEventListener('click', function () {
-    var f = $('filtros'); f.classList.toggle('aberto');
-    this.setAttribute('aria-expanded', String(f.classList.contains('aberto')));
-  });
+  $('mais').addEventListener('click', function () { mostrar += POR_PAGINA; desenhar(true); });
+
+  // filtros no celular: painel lateral
+  function filtrosAbertos(sim) {
+    $('lado').classList.toggle('aberto', sim);
+    $('abrir-filtros').setAttribute('aria-expanded', String(sim));
+    document.body.style.overflow = sim ? 'hidden' : '';
+    if (sim) $('f-q').focus(); else $('abrir-filtros').focus();
+  }
+  $('abrir-filtros').addEventListener('click', function () { filtrosAbertos(true); });
+  $('fechar-filtros').addEventListener('click', function () { filtrosAbertos(false); });
+  $('ver-res').addEventListener('click', function () { filtrosAbertos(false); window.scrollTo({ top: $('resumo').getBoundingClientRect().top + window.scrollY - 90 }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('lado').classList.contains('aberto')) filtrosAbertos(false); });
 
   /* ---------------- ficha do veículo ---------------- */
   var ficha = $('ficha'), atual = null, foto = 0, voltarFoco = null;
@@ -703,18 +950,24 @@ document.addEventListener('DOMContentLoaded', G.ligarLinks);
     if (id) abrir(id, false); else fechar(true);
   });
 
+  // fecha o painel de filtros ao tocar fora dele
+  document.addEventListener('click', function (e) {
+    var l = $('lado');
+    if (l.classList.contains('aberto') && !l.contains(e.target) && !e.target.closest('#abrir-filtros')) filtrosAbertos(false);
+  });
+
   function carregar(forcar) {
     $('grade').innerHTML = G.esqueletos(6);
     G.estoque(forcar).then(function (l) {
       lista = l; montarFiltros(); desenhar();
       var id = params.get('v');
       if (id && !abrir(id, false)) {
-        $('resumo').insertAdjacentHTML('afterbegin', '<span style="color:var(--ink)">Esse veículo já foi vendido ou saiu do site. Veja os outros abaixo.</span>');
+        $('aviso-v').innerHTML = '<p class="aviso-vendido">Esse veículo já foi vendido ou saiu do site. Veja os outros abaixo.</p>';
         urlLista();
       }
     }).catch(function () {
       $('resumo').innerHTML = '';
-      $('grade').innerHTML = '<div style="grid-column:1/-1">' + G.avisoErro('window.recarregarEstoque()') + '</div>';
+      $('grade').innerHTML = G.avisoErro('window.recarregarEstoque()');
     });
   }
   window.recarregarEstoque = function () { carregar(true); };
