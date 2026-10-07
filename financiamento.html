@@ -283,6 +283,109 @@ p{margin:0}
   .ficha-extra{padding:22px 20px 110px;gap:24px}
 }
 
+/* =====================================================================
+   MOVIMENTO
+   Uma curva só para o site inteiro, como a aceleração de um carro:
+   sai rápido e assenta devagar. Tudo desliga com "reduzir movimento".
+   ===================================================================== */
+:root{--sai:cubic-bezier(.16,.84,.3,1);--rapido:.22s;--medio:.6s}
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:.25s var(--sai) both vt-sai}
+::view-transition-new(root){animation:.45s var(--sai) both vt-entra}
+@keyframes vt-sai{to{opacity:0}}
+@keyframes vt-entra{from{opacity:0;transform:translateY(10px)}}
+.topo{view-transition-name:topo}
+:root{interpolate-size:allow-keywords}
+
+/* cabeçalho: encolhe e ganha vidro quando a página rola */
+.topo{transition:background var(--rapido),box-shadow var(--rapido)}
+.topo .wrap{transition:height .3s var(--sai)}
+.topo .marca{transition:width .3s var(--sai)}
+.topo.rolou{background:rgba(0,0,0,.86);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);box-shadow:0 10px 30px -12px rgba(0,0,0,.6)}
+@media (min-width:821px){.topo.rolou .wrap{height:60px}.topo.rolou .marca{width:170px}}
+.nav a{position:relative;border-bottom:0}
+.nav a::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--sai)}
+.nav a:hover::after,.nav a[aria-current="page"]::after{transform:scaleX(1)}
+
+/* botões: brilho que atravessa como reflexo na lataria */
+.btn{position:relative;overflow:hidden;transition:background var(--rapido),border-color var(--rapido),color var(--rapido),transform var(--rapido) var(--sai),box-shadow var(--rapido)}
+.btn-wa::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--sai);pointer-events:none}
+.btn-wa:hover::after{transform:translateX(120%)}
+.btn:hover{transform:translateY(-1px)}
+.btn-wa:hover{box-shadow:0 10px 24px -10px rgba(200,19,30,.7)}
+.btn:active{transform:translateY(1px)}
+
+/* cartões de veículo */
+.card{transition:border-color var(--rapido),transform .45s var(--sai),box-shadow .45s var(--sai)}
+.card:hover{transform:translateY(-6px);border-color:#C9CBD1;box-shadow:0 22px 40px -22px rgba(0,0,0,.35)}
+.card-foto img{transition:transform 1.1s var(--sai)}
+.card:hover .card-foto img{transform:scale(1.07)}
+.card-titulo h3{display:inline;background:linear-gradient(var(--red),var(--red)) left bottom/0 2px no-repeat;transition:background-size .45s var(--sai)}
+.card:hover .card-titulo h3{background-size:100% 2px}
+.card-preco small::after{content:" ›";display:inline-block;transition:transform .3s var(--sai)}
+.card:hover .card-preco small::after{transform:translateX(4px)}
+
+/* revelação ao rolar: a página abre como farol acendendo, da esquerda para a direita */
+.js-rv .rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--sai),transform .8s var(--sai);transition-delay:calc(var(--i,0) * 70ms)}
+.js-rv .rv.in{opacity:1;transform:none}
+/* no cartão, a foto acende da esquerda para a direita (o recorte fica na foto, não no cartão,
+   para o navegador continuar enxergando o cartão ao rolar) */
+.js-rv .card.rv{transition:opacity .6s var(--sai),transform .8s var(--sai),border-color var(--rapido),box-shadow .45s var(--sai);transition-delay:calc(var(--i,0) * 80ms)}
+.js-rv .card.rv .card-foto{clip-path:inset(0 100% 0 0);transition:clip-path 1s var(--sai);transition-delay:calc(var(--i,0) * 80ms + 120ms)}
+.js-rv .card.rv.in .card-foto{clip-path:inset(0 0 0 0)}
+.js-rv .card.rv.in:hover{transition-delay:0s}
+/* títulos de seção: a linha vermelha do logo se desenha embaixo */
+.secao-topo h2,.chamada h2{position:relative}
+.secao-topo h2::after{content:"";display:block;width:64px;height:4px;margin-top:14px;border-radius:2px;background:var(--red);transform-origin:left;transform:scaleX(1)}
+.js-rv .secao-topo.rv h2::after{transform:scaleX(0);transition:transform .9s var(--sai) .25s}
+.js-rv .secao-topo.rv.in h2::after{transform:scaleX(1)}
+.js-rv .chamada .risco{transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--sai) .2s}
+.js-rv .chamada.in .risco{transform:scaleX(1)}
+
+/* categorias, vantagens, passos */
+.cat{transition:background .35s var(--sai),color .35s var(--sai),border-color .35s,transform .35s var(--sai)}
+.cat svg{transition:transform .35s var(--sai),color .35s}
+.cat:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat:hover span{color:#B9BBC1}
+.cat:hover svg{transform:translateX(6px);color:#fff}
+.vantagem svg,.itens svg{transition:transform .5s var(--sai)}
+.vantagem:hover svg{transform:translateY(-3px) scale(1.08)}
+.passo::before{transition:transform .5s var(--sai)}
+.passo:hover::before{transform:translateX(6px)}
+
+/* dúvidas: abre e fecha deslizando (navegadores novos) */
+.faq details::details-content{block-size:0;overflow:hidden;transition:block-size .4s var(--sai),content-visibility .4s allow-discrete}
+.faq details[open]::details-content{block-size:auto}
+.faq summary{transition:color var(--rapido)}
+.faq summary:hover{color:var(--red-d)}
+.faq summary::after{transition:transform .35s var(--sai),margin .35s var(--sai)}
+
+/* ficha do veículo */
+.ficha{transition:background .3s}
+.ficha.aberta{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ficha-caixa{animation:abrir .45s var(--sai)}
+@keyframes abrir{from{opacity:0;transform:translateY(24px) scale(.985)}}
+.galeria-principal img{transition:opacity .35s var(--sai),transform .6s var(--sai)}
+.galeria-principal img.trocando{opacity:0;transform:scale(1.02)}
+.miniaturas button{transition:opacity var(--rapido),border-color var(--rapido)}
+.miniaturas button:hover{opacity:.9}
+.galeria-seta{transition:transform var(--rapido) var(--sai),background var(--rapido)}
+.galeria-seta:hover{transform:translateY(-50%) scale(1.08)}
+
+/* botões flutuantes: o WhatsApp pulsa uma vez a cada tanto, sem incomodar */
+.flutuante a{transition:transform .3s var(--sai)}
+.flutuante a:hover{transform:scale(1.08)}
+.flutuante a.wa::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(200,19,30,.55);animation:pulso 4s var(--sai) 3s infinite}
+.flutuante a.wa{position:relative}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(200,19,30,.55)}35%,100%{box-shadow:0 0 0 18px rgba(200,19,30,0)}}
+
+/* cabeçalho das páginas internas: o título sobe e a linha corre */
+.cab .trilha,.cab h1,.cab .lead,.cab .acoes{animation:sobe .8s var(--sai) both}
+.cab h1{animation-delay:.08s}.cab .lead{animation-delay:.18s}.cab .acoes{animation-delay:.28s}
+.cab::after{transform-origin:left;animation:corre 1.2s var(--sai) .2s both}
+@keyframes sobe{from{opacity:0;transform:translateY(18px)}}
+@keyframes corre{from{transform:scaleX(0)}}
+
 
 .fin{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
 .pilulas{display:flex;flex-wrap:wrap;gap:6px}
@@ -723,6 +826,43 @@ var G = (function () {
   };
 })();
 document.addEventListener('DOMContentLoaded', G.ligarLinks);
+
+/* ============================================================
+   MOVIMENTO: cabeçalho que encolhe e revelação ao rolar.
+   Quem pede "reduzir movimento" no aparelho vê tudo parado.
+   ============================================================ */
+(function () {
+  var topo = document.querySelector('.topo');
+  function rolar() { if (topo) topo.classList.toggle('rolou', window.scrollY > 24); }
+  window.addEventListener('scroll', rolar, { passive: true }); rolar();
+
+  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduz || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-rv');
+
+  var SEL = '.secao-topo, .vantagem, .passo, .grade > .card:not(.esqueleto), .cat, .itens li, .faq details, .etapa, .versus > div, .loja, .foto-sobre, .sigilo, .form-pe, .grade > .aviso, .barra';
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+
+  function marcar(raiz) {
+    var achados = [];
+    if (raiz.matches && raiz.matches(SEL)) achados.push(raiz);
+    if (raiz.querySelectorAll) achados = achados.concat([].slice.call(raiz.querySelectorAll(SEL)));
+    var porPai = new Map();
+    achados.forEach(function (el) {
+      if (el.classList.contains('rv')) return;
+      var n = porPai.get(el.parentNode) || 0; porPai.set(el.parentNode, n + 1);
+      el.style.setProperty('--i', Math.min(n, 6));
+      el.classList.add('rv'); io.observe(el);
+    });
+  }
+  marcar(document.body);
+  document.querySelectorAll('.chamada').forEach(function (c) { io.observe(c); });
+  new MutationObserver(function (ms) {
+    ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) marcar(n); }); });
+  }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+})();
 
 </script>
 <script>
